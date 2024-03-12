@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "661754d0-2e9a-47e3-8664-b577cc9fb59b",
+		"name": "Valentino Artisan Coffee House API",
+		"description": "An API for managing orders and products at a coffee place named Valentino's Artisan Coffee House.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "status",
+			"item": [
+				{
+					"name": "Get API status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d00614c7-bea6-41da-acfd-4953c7897db9",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    console.log(pm.response.status);",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Headers\", function(){",
+									"   console.log(pm.response.headers.get('X-Powered-By')) ;",
+									"   pm.expect(pm.response.headers.get('X-Powered-By')).to.eql('Express');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "33226046-946e-4c38-8bc3-89504a5ec84e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": "{{baseUrl}}/status",
+						"description": "Retrieve the current status of the API"
+					},
+					"response": [
+						{
+							"id": "e5a5b396-7075-4282-afea-b93ec74c1947",
+							"name": "API status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "{{baseUrl}}/status"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"enabled": true
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"status\": \"<string>\"\n}"
+						}
+					]
+				},
+				{
+					"name": "{{baseUrl}}/status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "049f8969-2cd0-4cf3-bfc4-f822e9b34f70",
+								"exec": [
+									"let person = {",
+									"    firstName : \"Jake\",",
+									"    lastName : \"Doe\",",
+									"    age : 29,",
+									"    isAdult : true,",
+									"    'e-mail' : 'jake@example.com',",
+									"    hobbies : ['reading', 'travelling', 'gardening', 'cooking'],",
+									"greet: function(name){",
+									"    console.log(\"Hello Postman: \" + name +'. My name is ' + this.firstName);",
+									"}",
+									"",
+									"};",
+									"person.greet('Claudine');",
+									"",
+									"let sayHello = function() {",
+									"    console.log(\"Say Hello\")",
+									"}",
+									"",
+									"sayHello();",
+									"",
+									"function doSomething(someFunction) {",
+									"    console.log(\"Before running: \");",
+									"    someFunction();",
+									"    console.log(\"After running: \");",
+									"",
+									"}",
+									"",
+									"doSomething(sayHello);",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2521d694-05c5-477a-9fb4-54de667be475",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseUrl}}/status"
+					},
+					"response": []
+				}
+			],
+			"id": "7af1ec31-42e7-4f19-abc7-d0d950b28d2c",
+			"description": "Get the status of the API."
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "Get all products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "800686ef-ca83-48f4-9ad6-41f077958e4d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    console.log(pm.response.status);",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "6ba306df-fb1f-4500-afda-9b77c2ea0a90",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"description": "The page number to fetch",
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "cookie",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "3",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Retrieve a paginated list of products, 10 products per page"
+					},
+					"response": [
+						{
+							"id": "35d0ee37-4078-4a9e-930d-731fa5a50d93",
+							"name": "A list of products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products?page=1",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"description": "The page number to fetch",
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"enabled": true
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "[\n  {\n    \"id\": \"<integer>\",\n    \"category\": \"<string>\",\n    \"name\": \"<string>\",\n    \"isAvailable\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"category\": \"<string>\",\n    \"name\": \"<string>\",\n    \"isAvailable\": \"<boolean>\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get single product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4eafa1cf-4eb5-4287-a75c-6a3799e4bd8e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"const response = pm.response.json();",
+									"console.log(response['product-description']);",
+									"",
+									"pm.test(\"Name is espresso\", function() {",
+									"   pm.expect(response.name).to.eql(\"Espresso\");",
+									"   pm.expect(response.id).to.eql(parseInt(pm.collectionVariables.get('productId')));",
+									"   pm.expect(response).to.have.property('name');",
+									"   pm.expect(response.name).to.be.a('string');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a3c76cc1-2ee0-4fe7-816d-4c0bf2d0aa6c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "2d8b0805-d402-46f0-9a94-b1a2de8755d6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/products/:productId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								":productId"
+							],
+							"variable": [
+								{
+									"id": "547a474c-82ec-4e2c-bdb8-ce9d4dbda102",
+									"key": "productId",
+									"value": "1001"
+								}
+							]
+						},
+						"description": "Retrieve a single product by specifying the product ID."
+					},
+					"response": []
+				}
+			],
+			"id": "4f76592c-dfb9-40da-bd3d-c1dc88f19e9b"
+		},
+		{
+			"name": "clients",
+			"item": [
+				{
+					"name": "Register a new client",
+					"id": "b8e581cc-0022-4042-bb5e-52f2e03ddb6e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{$randomExampleEmail}}\"\n}"
+						},
+						"url": "{{baseUrl}}/clients",
+						"description": "Register a new API client by providing an email address"
+					},
+					"response": [
+						{
+							"id": "9da0ce61-ebf6-4d1e-bc51-b44f568e89fe",
+							"name": "Client registered",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"<email>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/clients"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"enabled": true
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n  \"value\": \"reference #/components/schemas/ApiClient not found in the OpenAPI spec\"\n}"
+						}
+					]
+				}
+			],
+			"id": "54e8cbd2-f316-493a-8b52-a03359d156b5"
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "Create a new order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "85471839-6f0c-4fd4-af5d-149160cb7fed",
+								"exec": [
+									"let response;",
+									"",
+									"pm.test(\"Verify response body is json\", function() {",
+									"    pm.response.to.be.json;",
+									"    response = pm.response.json();",
+									"    pm.collectionVariables.set('orderId', response.id);",
+									"",
+									"});",
+									"",
+									"pm.test(\"Customer name\", function (){",
+									"    pm.expect(response.customerName).to.eql(pm.collectionVariables.get('customerName'));",
+									"",
+									"    console.log(\"Test : \" + pm.collectionVariables.get('customerName'));",
+									"});",
+									"",
+									"pm.test(\"Order ID format\", function (){",
+									" //   pm.expect(response.id).to.match(/^[A-Z0-9]{10}$/);",
+									"",
+									"});",
+									"",
+									"pm.test('Schema is valid', function () {",
+									"const schema = {",
+									"\"type\": \"object\",",
+									"\"properties\": {",
+									"    \"id\": {",
+									"\t\"type\": \"string\",",
+									"    //\"pattern\" : '^[A-Z0-9]{10}$'",
+									"    },",
+									"    \"clientId\": {",
+									"\t\"type\": \"string\",",
+									"    },",
+									"    \"created\": {",
+									"\t\"type\": \"string\",",
+									"    },",
+									"    \"customerName\": {",
+									"\t\"type\": \"string\"",
+									"    },",
+									"    \"products\": {",
+									"\t\"type\": \"array\",",
+									"        \"properties\" : {",
+									"            \"id\" : {",
+									"                type : 'integer'",
+									"            } , ",
+									"            \"quantity\" : {",
+									"                 type : 'integer'",
+									"            } ",
+									"        }    ",
+									"         ,  required: ['id', 'quantity']",
+									"    }",
+									"},",
+									"      required : ['id', 'clientId', 'created' , 'customerName', \"products\"],",
+									"     additionalProperties : false",
+									"};",
+									"pm.response.to.have.jsonSchema(schema);",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0916a802-a23f-4f7a-a804-46c66768a4e3",
+								"exec": [
+									"pm.collectionVariables.set('customerName', pm.variables.replaceIn('{{$randomFullName}}'));",
+									"",
+									" console.log(\"PRE REQUISITE  : \" + pm.collectionVariables.get('customerName'));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "989aca37-e02c-4373-8ff4-6c0201cb2ae5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"customerName\": \"{{customerName}}\",\n  \"products\": [\n    {\n      \"id\": {{productId}},\n      \"quantity\": 1\n    },\n    {\n      \"id\": 2002,\n      \"quantity\": 3\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseUrl}}/orders",
+						"description": "Place a new order by providing customer details and ordered products"
+					},
+					"response": [
+						{
+							"id": "75b6819d-be16-4dae-b925-a60d30e5189a",
+							"name": "Create a new order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"customerName\": \"{{customerName}}\",\n  \"products\": [\n    {\n      \"id\": {{productId}},\n      \"quantity\": 1\n    },\n    {\n      \"id\": 2002,\n      \"quantity\": 3\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/orders"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1709827433&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=UIi80hRkTIJSsFWV4BIl3nKPgkPEHMBrCarA6rUMsiw%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1709827433&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=UIi80hRkTIJSsFWV4BIl3nKPgkPEHMBrCarA6rUMsiw%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "174"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"ae-CinFm61lFhtysJDR5waOjv5tWIQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 07 Mar 2024 16:03:53 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{\n    \"clientId\": \"l0OSHaEqG\",\n    \"created\": \"2024-03-07T16:03:53.271Z\",\n    \"customerName\": \"Jean Vandervort\",\n    \"products\": [\n        {\n            \"id\": 1001,\n            \"quantity\": 1\n        },\n        {\n            \"id\": 2002,\n            \"quantity\": 3\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "de364934-960b-4fde-a0a5-9f475ce31705",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    console.log(pm.response.status);",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "da83d4e1-d608-4f96-b8bf-4b7f43b9f258",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": "{{baseUrl}}/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "Get an order by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd87b506-ba7d-49bb-b24d-1fbdb70d72b0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    console.log(pm.response.status);",
+									"    pm.expect(pm.response.status).to.eql(\"OK\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "41bb7954-653c-4ad0-b3dd-edb2e2a49d96",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "0a47edfa-976b-4ad3-95c9-58cab9596b39",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/orders/:orderId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"orders",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "4201cd01-de44-4bcc-a91d-af95738df637",
+							"name": "The requested order",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/orders/:orderId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders",
+										":orderId"
+									],
+									"variable": [
+										{
+											"key": "orderId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"responseTime": null,
+							"body": "{}"
+						}
+					]
+				}
+			],
+			"id": "3504a78f-ecd3-477a-bc7a-42f6ebcc0ff5",
+			"auth": {
+				"type": "apikey",
+				"apikey": {
+					"value": "{{apiKey}}",
+					"key": "x-api-key"
+				}
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b8752179-9a43-4bbe-96de-c2b5af9b5f9e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "aa2c609f-4f7c-41e8-950a-067920584e9e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b6712b1c-92bb-4d28-a2d8-b9ecbb97be61",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "147be800-1c1f-4744-bd7e-b08ab5746d2d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://valentinos-coffee.glitch.me",
+			"disabled": true
+		},
+		{
+			"key": "apiKey",
+			"value": "44854c4dff8fe6139e34be8910e1d06c258b4816"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://valentinos-coffee.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "productId",
+			"value": "1001"
+		},
+		{
+			"key": "orderId",
+			"value": "Z7MVZX_ND"
+		},
+		{
+			"key": "customerName",
+			"value": ""
+		}
+	]
+}
